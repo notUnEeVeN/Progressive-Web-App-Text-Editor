@@ -43,6 +43,7 @@ registerRoute(
   })
 );
 
+//cache javascript
 registerRoute(
   ({ request }) => request.destination === 'script',
   new CacheFirst({
@@ -58,4 +59,19 @@ registerRoute(
   })
 )
 
+//cache images
+registerRoute(
+  ({ request }) => request.destination === 'font',
+  new CacheFirst({
+    cacheName: 'font-cache',
+    plugins: [
+      new CacheableResponsePlugin({
+        statuses: [0, 200],
+      }),
+      new ExpirationPlugin({
+        maxAgeSeconds: 30 * 24 * 60 * 60,
+      }),
+    ],
+  })
+)
 
