@@ -75,6 +75,7 @@ registerRoute(
   })
 )
 
+//cache font
 registerRoute(
   ({ request }) => request.destination === 'font',
   new CacheFirst({
